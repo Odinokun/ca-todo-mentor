@@ -1,4 +1,8 @@
-import { TaskType } from './App';
+export type TaskType = {
+  id: number;
+  title: string;
+  isDone: boolean;
+};
 
 type PropsType = {
   title: string;

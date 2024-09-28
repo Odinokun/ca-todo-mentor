@@ -1,11 +1,5 @@
 import './App.css';
-import { Todolist } from './Todolist';
-
-export type TaskType = {
-  id: number;
-  title: string;
-  isDone: boolean;
-};
+import { TaskType, Todolist } from './Todolist';
 
 function App() {
   const title_1: string = 'What to learn?';
