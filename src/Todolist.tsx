@@ -38,7 +38,7 @@ export const Todolist: FC<PropsType> = ({ title, tasks, ...restProps }) => {
         <Button name='Completed' onClick={() => {}} />
       </div>
 
-      <ul>{!tasks.length ? <div>You have no tasks </div> : tasksList}</ul>
+      {!tasks.length ? <div>You have no tasks </div> : <ul>{tasksList}</ul>}
     </div>
   );
 };
