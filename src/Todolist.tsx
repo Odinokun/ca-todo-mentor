@@ -27,15 +27,19 @@ export const Todolist: FC<PropsType> = ({ title, tasks, ...restProps }) => {
         <Button name='Completed' onClick={() => {}} />
       </div>
       <ul>
-        {tasks.map(task => {
-          return (
-            <li key={task.id}>
-              <Button name='del' onClick={() => {}} />
-              <input type='checkbox' checked={task.isDone} />
-              <span>{task.title}</span>
-            </li>
-          );
-        })}
+        {!tasks.length ? (
+          <div>You have no tasks </div>
+        ) : (
+          tasks.map(task => {
+            return (
+              <li key={task.id}>
+                <Button name='del' onClick={() => {}} />
+                <input type='checkbox' checked={task.isDone} />
+                <span>{task.title}</span>
+              </li>
+            );
+          })
+        )}
       </ul>
     </div>
   );
