@@ -1,3 +1,5 @@
+import { FC } from 'react';
+
 export type TaskType = {
   id: number;
   title: string;
@@ -9,13 +11,13 @@ type PropsType = {
   tasks: TaskType[];
 };
 
-export const Todolist = ({ title, tasks }: PropsType) => {
+export const Todolist: FC<PropsType> = ({ title, tasks, ...restProps }) => {
   return (
     <div className='todolist'>
       <h3>{title}</h3>
       <div>
         <input />
-        <button>+</button>
+        <button>add task</button>
       </div>
       <br />
       <div>
@@ -27,7 +29,7 @@ export const Todolist = ({ title, tasks }: PropsType) => {
         {tasks.map(task => {
           return (
             <li key={task.id}>
-              <button>x</button>
+              <button>del</button>
               <input type='checkbox' checked={task.isDone} />
               <span>{task.title}</span>
             </li>
