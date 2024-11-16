@@ -10,13 +10,21 @@ export type TaskType = {
 type PropsType = {
   title: string;
   tasks: TaskType[];
+  removeTask: (id: number) => void;
 };
 
-export const Todolist: FC<PropsType> = ({ title, tasks, ...restProps }) => {
+export const Todolist: FC<PropsType> = ({
+  title,
+  tasks,
+  removeTask,
+  ...restProps
+}) => {
   const tasksList: JSX.Element[] = tasks.map(task => {
+    const removeTaskHandler = () => removeTask(task.id);
+
     return (
       <li key={task.id}>
-        <Button name='del' onClick={() => {}} />
+        <Button name='del' onClick={removeTaskHandler} />
         <input type='checkbox' checked={task.isDone} />
         <span>{task.title}</span>
       </li>
@@ -38,7 +46,7 @@ export const Todolist: FC<PropsType> = ({ title, tasks, ...restProps }) => {
         <Button name='Completed' onClick={() => {}} />
       </div>
 
-      {tasks.length ? <ul>{tasksList}</ul> : <div>You have no tasks </div>}
+      {tasks.length ? <ul>{tasksList}</ul> : <div>You have no tasks</div>}
     </div>
   );
 };
