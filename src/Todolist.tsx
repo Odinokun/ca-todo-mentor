@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { Button } from './components/Button';
 
 export type TaskType = {
   id: number;
@@ -17,19 +18,19 @@ export const Todolist: FC<PropsType> = ({ title, tasks, ...restProps }) => {
       <h3>{title}</h3>
       <div>
         <input />
-        <button>add task</button>
+        <Button name='add task' onClick={() => {}} />
       </div>
       <br />
       <div>
-        <button>All</button>
-        <button>Active</button>
-        <button>Completed</button>
+        <Button name='All' onClick={() => {}} />
+        <Button name='Active' onClick={() => {}} />
+        <Button name='Completed' onClick={() => {}} />
       </div>
       <ul>
         {tasks.map(task => {
           return (
             <li key={task.id}>
-              <button>del</button>
+              <Button name='del' onClick={() => {}} />
               <input type='checkbox' checked={task.isDone} />
               <span>{task.title}</span>
             </li>
