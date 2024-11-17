@@ -20,8 +20,6 @@ function App() {
 
   const tasksFilter = (state: TaskType[], filter: FilterType) => {
     switch (filter) {
-      case 'all':
-        return state;
       case 'active':
         return state.filter(t => !t.isDone);
       case 'completed':
