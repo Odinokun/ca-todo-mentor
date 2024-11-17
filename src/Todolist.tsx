@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { FilterType } from './App';
 import { Button } from './components/Button';
 
 export type TaskType = {
@@ -11,12 +12,14 @@ type PropsType = {
   title: string;
   tasks: TaskType[];
   removeTask: (id: number) => void;
+  setFilter: (filter: FilterType) => void;
 };
 
 export const Todolist: FC<PropsType> = ({
   title,
   tasks,
   removeTask,
+  setFilter,
   ...restProps
 }) => {
   const tasksList: JSX.Element[] = tasks.map(task => {
@@ -30,6 +33,9 @@ export const Todolist: FC<PropsType> = ({
       </li>
     );
   });
+  const setAll = () => setFilter('all');
+  const setActive = () => setFilter('active');
+  const setCompleted = () => setFilter('completed');
 
   return (
     <div className='todolist'>
@@ -41,9 +47,9 @@ export const Todolist: FC<PropsType> = ({
       <br />
 
       <div>
-        <Button name='All' onClick={() => {}} />
-        <Button name='Active' onClick={() => {}} />
-        <Button name='Completed' onClick={() => {}} />
+        <Button name='All' onClick={setAll} />
+        <Button name='Active' onClick={setActive} />
+        <Button name='Completed' onClick={setCompleted} />
       </div>
 
       {tasks.length ? <ul>{tasksList}</ul> : <div>You have no tasks</div>}
