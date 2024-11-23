@@ -1,4 +1,4 @@
-import { FC, KeyboardEvent, useRef } from 'react';
+import { ChangeEvent, FC, KeyboardEvent, useState } from 'react';
 import { FilterType } from './App';
 import { Button } from './components/Button';
 
@@ -24,7 +24,7 @@ export const Todolist: FC<PropsType> = ({
   setFilter,
   ...restProps
 }) => {
-  const inputRef = useRef<HTMLInputElement>(null);
+  const [inputValue, setInputValue] = useState<string>('');
 
   const tasksList: JSX.Element[] = tasks.map(task => {
     const removeTaskHandler = () => removeTask(task.id);
@@ -37,25 +37,33 @@ export const Todolist: FC<PropsType> = ({
       </li>
     );
   });
-
   const setAll = () => setFilter('all');
   const setActive = () => setFilter('active');
   const setCompleted = () => setFilter('completed');
 
   const addTaskHandler = () => {
-    if (!inputRef.current?.value.trim()) return;
-    addTask(inputRef.current?.value.trim());
-    inputRef.current.value = '';
+    if (!inputValue.trim()) return;
+    addTask(inputValue.trim());
+    setInputValue('');
   };
 
-  const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) =>
-    e.key === 'Enter' && addTaskHandler();
+  const inputChangeHandler = (e: ChangeEvent<HTMLInputElement>) =>
+    setInputValue(e.target.value);
+  const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      addTaskHandler();
+    }
+  };
 
   return (
     <div className='todolist'>
       <h3>{title}</h3>
       <div>
-        <input ref={inputRef} onKeyDown={onKeyPressHandler} />
+        <input
+          value={inputValue}
+          onChange={inputChangeHandler}
+          onKeyDown={onKeyPressHandler}
+        />
         <Button name='add task' onClick={addTaskHandler} />
       </div>
       <br />
