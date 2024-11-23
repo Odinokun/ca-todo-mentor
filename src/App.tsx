@@ -1,31 +1,31 @@
 import { useState } from 'react';
-import './App.css';
 import { TaskType, Todolist } from './Todolist';
+import './App.css';
 
 export type FilterType = 'all' | 'active' | 'completed';
 
 function App() {
   const title: string = 'What to learn?';
   const [state, setState] = useState<TaskType[]>([
-    { id: 1, title: 'HTML&CSS', isDone: true },
-    { id: 2, title: 'JS', isDone: true },
-    { id: 3, title: 'React', isDone: false },
-    { id: 4, title: 'GraphQL', isDone: false },
-    { id: 5, title: 'Rest API', isDone: false },
-    { id: 6, title: 'Graph API', isDone: false },
+    { id: crypto.randomUUID(), title: 'HTML&CSS', isDone: true },
+    { id: crypto.randomUUID(), title: 'JS', isDone: true },
+    { id: crypto.randomUUID(), title: 'React', isDone: false },
+    { id: crypto.randomUUID(), title: 'GraphQL', isDone: false },
+    { id: crypto.randomUUID(), title: 'Rest API', isDone: false },
+    { id: crypto.randomUUID(), title: 'Graph API', isDone: false },
   ]);
   const [filter, setFilter] = useState<FilterType>('all');
 
   const addTask = (title: string) => {
     const newTask: TaskType = {
-      id: new Date().getTime(),
+      id: crypto.randomUUID(),
       title,
       isDone: false,
     };
     setState([newTask, ...state]);
   };
 
-  const removeTask = (id: number) => setState(state.filter(t => t.id !== id));
+  const removeTask = (id: string) => setState(state.filter(t => t.id !== id));
 
   const tasksFilter = (state: TaskType[], filter: FilterType): TaskType[] => {
     switch (filter) {

@@ -1,9 +1,9 @@
-import { FC, useState } from 'react';
+import { ChangeEvent, FC, KeyboardEvent, useState } from 'react';
 import { FilterType } from './App';
 import { Button } from './components/Button';
 
 export type TaskType = {
-  id: number;
+  id: string;
   title: string;
   isDone: boolean;
 };
@@ -12,7 +12,7 @@ type PropsType = {
   title: string;
   tasks: TaskType[];
   addTask: (title: string) => void;
-  removeTask: (id: number) => void;
+  removeTask: (id: string) => void;
   setFilter: (filter: FilterType) => void;
 };
 
@@ -47,9 +47,9 @@ export const Todolist: FC<PropsType> = ({
     setInputValue('');
   };
 
-  const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) =>
+  const inputChangeHandler = (e: ChangeEvent<HTMLInputElement>) =>
     setInputValue(e.target.value);
-  const onKeyPressHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       addTaskHandler();
     }
