@@ -49,11 +49,8 @@ export const Todolist: FC<PropsType> = ({
 
   const inputChangeHandler = (e: ChangeEvent<HTMLInputElement>) =>
     setInputValue(e.target.value);
-  const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      addTaskHandler();
-    }
-  };
+  const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) =>
+    e.key === 'Enter' && addTaskHandler();
 
   return (
     <div className='todolist'>
