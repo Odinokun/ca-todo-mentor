@@ -16,9 +16,18 @@ function App() {
   ]);
   const [filter, setFilter] = useState<FilterType>('all');
 
+  const addTask = (title: string) => {
+    const newTask: TaskType = {
+      id: new Date().getTime(),
+      title,
+      isDone: false,
+    };
+    setState([newTask, ...state]);
+  };
+
   const removeTask = (id: number) => setState(state.filter(t => t.id !== id));
 
-  const tasksFilter = (state: TaskType[], filter: FilterType) => {
+  const tasksFilter = (state: TaskType[], filter: FilterType): TaskType[] => {
     switch (filter) {
       case 'active':
         return state.filter(t => !t.isDone);
@@ -35,6 +44,7 @@ function App() {
       <Todolist
         title={title}
         tasks={filteredTasks}
+        addTask={addTask}
         removeTask={removeTask}
         setFilter={setFilter}
       />
